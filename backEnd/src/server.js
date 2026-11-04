@@ -4,7 +4,9 @@ import mongoose from "mongoose"
 import cabinRouter from "./routes/cabinRoutes.js"
 import authRouter from "./routes/authRoutes.js"
 import bookingRouter from "./routes/bookingRoutes.js"
+import dashboardRouter from "./routes/dashboardRoutes.js";
 import cors from "cors"
+
 
 
 
@@ -16,6 +18,8 @@ app.use(cors())
 app.use("/api/v1/cabins", cabinRouter)
 app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/bookings", bookingRouter);
+app.use("/api/v1/dashboard", dashboardRouter);
+
 
 const DB = process.env.DATABASE_URL
 

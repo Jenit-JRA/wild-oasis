@@ -123,7 +123,7 @@ export const createBooking = async (req, res) => {
             cabin: cabinData._id,
             startDate: { $lt: checkOut },
             endDate: { $gt: checkIn },
-            status: { $ne: "cancelled" },
+            status: { $ne: "CANCELLED" },
         });
 
         if (conflictingBooking) {
@@ -137,7 +137,6 @@ export const createBooking = async (req, res) => {
         const booking = await Booking.create({
             cabin: cabinData._id,
             user: req.user.id,
-            name: req.user.id,
             startDate: checkIn,
             endDate: checkOut,
             noOfGuests: guestCount,
@@ -202,7 +201,7 @@ export const manageBooking = async (req, res) => {
                 message: "This booking is already cancelled",
             });
         }
-        if (bookingToUpdate.name.toString() !== req.user.id) {
+        if (bookingToUpdate.user.toString() !== req.user.id) {
             return res.status(403).json({
                 status: "fail",
                 message: "You are not allowed to cancel this booking",
